@@ -163,13 +163,14 @@ function System() {
 		return false;
 	};
 	this.isInChannel = function (src, channel) {
-		return false;
+		return true;
 	};
 	this.channelId = function (name) {
 		return 0;
 	};
 	this.playersOfChannel = function (channel) {
-		return [];
+        var system = this;
+		return players.map(function(p) { return system.id(p.name); });
 	};
 	this.rand = function (min, max) {
 		return min + Math.floor(Math.random() * max);
