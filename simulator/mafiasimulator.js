@@ -158,7 +158,10 @@ function init() {
                     muteall: false,
                     isChannelOperator: function(src) {
                         return false;
-                    }
+                    },
+		    isChannelMember: function(src) {
+			return false;
+		    }
                 };
             },
             users: function(id) {
