@@ -169,7 +169,7 @@ function System() {
 		return 0;
 	};
 	this.playersOfChannel = function (channel) {
-        var system = this;
+        	var system = this;
 		return players.map(function(p) { return system.id(p.name); });
 	};
 	this.rand = function (min, max) {
