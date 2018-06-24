@@ -1,6 +1,6 @@
 /*jshint "laxbreak":true,"shadow":true,"undef":true,"evil":true,"trailing":true,"proto":true,"withstmt":true*/
 /*global alert, document, sendToChat, Mafia, exports, mafiaChecker, mafiaStats, focusChat*/
-var theme, mafia, sys, mafiabot, utilities, stats, checker, SESSION, script, timer, savedTicks, is_command, nonFlashing, html_escape,
+var theme, mafia, sys, mafiabot, utilities, stats, checker, SESSION, script, timer, savedTicks, is_command, nonFlashing, html_escape, isSuperAdmin,
     ticks = 0,
     currentPlayer = null,
     channel = 0,
@@ -197,6 +197,7 @@ function init() {
                 
             }
         };
+	isSuperAdmin = function(src) { return false; };
         utilities = exports;
         checker = new mafiaChecker();
         stats = new mafiaStats();
