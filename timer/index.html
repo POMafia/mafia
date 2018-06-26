@@ -1,7 +1,7 @@
 <html>
 
 <head>
-<title>Mafia Game Night 3</title>
+
 <script type="text/javascript">
 /* stolen from here: http://stackoverflow.com/questions/610406/javascript-equivalent-to-printf-string-format */	
 String.prototype.format = function() {
@@ -13,9 +13,12 @@ String.prototype.format = function() {
     return formatted;
 };
 
-var unix = 1529802000000, // Sat Jun 23 2018 21:00:00 GMT-0400 (Eastern Daylight Time)
-    name = "Mafia Game Night #3",
-    date = new Date(unix);
+// Sat Jun 23 2018 21:00:00 GMT-0400 (Eastern Daylight Time)
+var unix = 1529802000000; // PUT NUMBER RETRIEVED FROM https://pomafia.github.io/mafia/timer/unix.html HERE
+var title = "Mafia Game Night #3";
+var date = new Date(unix);
+
+document.title = title;
 
 // Setting font colors
 var o = Math.round(Math.random()); // to randomize flashing text start
@@ -26,7 +29,6 @@ var font_color = "black",
 	color2 = o === 0 ? flash_color : font_color;
 
 function updateCounter() {
-	//var find_time = function(year, month, day, hours, minutes, seconds) { if (isNaN(month)) { month = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"].indexOf(month.toLowerCase()); }; var date = new Date(year, month, day, hours, minutes, seconds, 0); return date.getTime() + "<br> UTC Time: " + date.toUTCString() + "<br> Local Time: " + date.toString(); }; find_time(y, mo, d, h, min, s);
 	var time = Math.floor((unix - new Date().getTime()) / 1000);
 	
 	var n, t = time < 0 ? -time : time, s = [], d = [[24*60*60, "DAY"], [60*60, "HOUR"], [60, "MINUTE"], [1, "SECOND"]];
@@ -71,7 +73,7 @@ function updateCounter() {
 	
 	var table = "<table cellpadding='5' cellspacing='0' style='table-layout: fixed; width: 100%'><tr><td><center><font size=10 color='" + dcolor + "'><b>{0}</b></font></font></center></td><td><center><font size=10 color='" + hcolor + "'><b>{1}</b></font></center></td><td><center><font size=10 color='" + mcolor + "'><b>{2}</b></font></center></td><td><center><font size=10 color='" + scolor + "'><b>{3}</b></font></center></td></tr><tr><td><center><font size=10 color='" + dcolor + "'>{4}</font></center></td><td><center><font size=10 color='" + hcolor + "'>{5}</font></center></td><td><center><font size=10 color='" + mcolor + "'>{6}</font></center></td><td><center><font size=10 color='" + scolor + "'>{7}</font></center></td></tr></table>";
 
-    document.getElementById("heading").innerHTML = "<font size=10 color='" + (time < 0 ? "blue" : "red") + "'><b>Time " + (time < 0 ? "Since " : "Until ") + name + "</b></font>";
+    document.getElementById("heading").innerHTML = "<font size=10 color='" + (time < 0 ? "blue" : "red") + "'><b>Time " + (time < 0 ? "Passed Since " : "Left Until ") + title + "</b></font>";
     document.getElementById("date").innerHTML = "<font size=5><b>Event Time In Your Time Zone:</b> <br><i>" + date.toString() + "</i></font>"
 	document.getElementById("countdown").innerHTML = table.format(s[0][0], s[1][0], s[2][0], s[3][0], s[0][1], s[1][1], s[2][1], s[3][1]);
 }
