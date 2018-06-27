@@ -1,3 +1,4 @@
+
 <html>
 
 <head>
@@ -72,8 +73,16 @@ function updateCounter() {
     
     var table = "<table cellpadding='5' cellspacing='0' style='table-layout: fixed; width: 100%'><tr><td><center><font size=10 color='" + dcolor + "'><b>{0}</b></font></font></center></td><td><center><font size=10 color='" + hcolor + "'><b>{1}</b></font></center></td><td><center><font size=10 color='" + mcolor + "'><b>{2}</b></font></center></td><td><center><font size=10 color='" + scolor + "'><b>{3}</b></font></center></td></tr><tr><td><center><font size=10 color='" + dcolor + "'>{4}</font></center></td><td><center><font size=10 color='" + hcolor + "'>{5}</font></center></td><td><center><font size=10 color='" + mcolor + "'>{6}</font></center></td><td><center><font size=10 color='" + scolor + "'>{7}</font></center></td></tr></table>";
 
-    document.getElementById("heading").innerHTML = "<font size=10 color='" + (time < 0 ? "blue" : "red") + "'><b>Time " + (time < 0 ? "Passed Since " : "Left Until ") + title + "</b></font>";
-    document.getElementById("date").innerHTML = "<font size=5><b>Event Time In Your Time Zone:</b> <br><i>" + date.toString() + "</i></font>"
+    var hours = date.getHours();
+    var h = hours % 12;
+    if (h === 0) {
+        h = 12;
+    }
+    var m = date.getMinutes();
+    var clock = "{0}:{1} {2}".format(h < 10 ? "0" + h : h, m < 10 ? "0" + m : m, hours < 12 ? "A.M." : "P.M."); 
+    
+    document.getElementById("heading").innerHTML = "<font size=10 color='{0}'><b>Time {1} {2}</b></font>".format(time < 0 ? "blue" : "red", time < 0 ? "Passed Since " : "Left Until ", title);
+    document.getElementById("date").innerHTML = "<font size=5><b>Event Time In Your Time Zone:</b> <br>{0}</font><br><font size=3><i>(In 12-hour time: {1})</i></font>".format(date.toString(), clock);
     document.getElementById("countdown").innerHTML = table.format(s[0][0], s[1][0], s[2][0], s[3][0], s[0][1], s[1][1], s[2][1], s[3][1]);
 }
 </script>
