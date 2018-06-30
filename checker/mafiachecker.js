@@ -739,7 +739,7 @@ function mafiaChecker() {
                     }
                 }
                 if (checkType(role.actions.standby, ["object"], act + ".standby")) {
-                    var appendActions = ["newRole", "canConvert", "silent", "convertmsg", "convertusermsg", "tarmsg", "copyAs", "canCopy", "copymsg", "copyusermsg", "convertRoles", "singlemassconvertmsg", "massconvertmsg", "macro", "compulsory", "silentMassConvert"];
+                    var appendActions = ["newRole", "canConvert", "silent", "convertmsg", "convertusermsg", "tarmsg", "copyAs", "canCopy", "copymsg", "copyusermsg", "convertRoles", "singlemassconvertmsg", "massconvertmsg", "macro", "compulsory", "silentMassConvert", "silentCopy", "silent", "copyfailmsg"];
                     for (e in role.actions.standby) {
                         action = role.actions.standby[e];
                         comm = act + ".standby." + e;
@@ -1392,7 +1392,7 @@ function mafiaChecker() {
     Theme.prototype.checkOnDeath = function(action, comm, extra, isLynch) {
         var e;
         
-        checkAttributes(action, [], ["killRoles", "poisonRoles", "convertRoles", "curseRoles", "exposeRoles", "killmsg", "exposeMemory", "killMemory", "convertmsg", "curseCount", "cursemsg", "curseConvertMessage", "poisonmsg", "poisonDeadMessage", "exposemsg", "singlekillmsg", "singlepoisonmsg", "singleconvertmsg", "singlecursemsg", "silentConvert", "silentCurse", "convert", "detoxRoles", "detoxmsg"].concat(extra), comm);
+        checkAttributes(action, [], ["killRoles", "poisonRoles", "convertRoles", "curseRoles", "exposeRoles", "killmsg", "exposeMemory", "killMemory", "convertmsg", "curseCount", "cursemsg", "curseConvertMessage", "poisonmsg", "poisonDeadMessage", "exposemsg", "singlekillmsg", "singlepoisonmsg", "singleconvertmsg", "singlecursemsg", "silentConvert", "silentCurse", "convert", "detoxRoles", "detoxmsg", "singledetoxmsg"].concat(extra), comm);
                     
         checkType(action.onslay, ["boolean"], comm + ".onslay");
         
@@ -1468,6 +1468,14 @@ function mafiaChecker() {
         if (checkType(action.detoxmsg, ["string"], comm + ".detoxmsg")) {
             if (!("detoxRoles" in action)) {
                 addMinorError("'detoxmsg' found at " + comm + ", but there's no 'detoxRoles'");
+            }
+        }
+        if (checkType(action.singledetoxmsg, ["string"], comm + ".singledetoxmsg")) {
+            if (!("detoxRoles" in action)) {
+                addMinorError("'singledetoxmsg' found at " + comm + ", but there's no 'detoxRoles'");
+            }
+            if ("detoxmsg" in action) {
+                addMinorError(comm + " has both 'detoxmsg' and 'singledetoxmsg', so 'detoxmsg' won't be used");
             }
         }
         
