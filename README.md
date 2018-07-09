@@ -8,5 +8,8 @@ Then, in the timer/index.html file, change the line that says "var unix = ###," 
 # checker
 Mafia Checker originally made by IceKirby
 
+# guide
+Mafia Beginner Guide originally made by IceKirby
+
 # simulator
 Mafia Simulator originally made by IceKirby
